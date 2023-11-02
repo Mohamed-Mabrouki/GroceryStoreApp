@@ -16,17 +16,14 @@ import javax.inject.Singleton
 object AppModule {
 	@Provides
 	@Singleton
-	fun provideProductDatabase(app:Application):ProductDatabase{
+	fun provideProductDatabase(app : Application) : ProductDatabase {
 		return Room.databaseBuilder(
-			context = app,
-			klass = ProductDatabase::class.java,
-			name = "product_db"
-		).build()
+			context = app, klass = ProductDatabase::class.java, name = "product_db"
+		).fallbackToDestructiveMigration().build()
 	}
-
 	@Provides
 	@Singleton
-	fun providesDataBaseRepository(db:ProductDatabase) : ProductRepository {
+	fun providesDataBaseRepository(db : ProductDatabase) : ProductRepository {
 		return ProductRepositoryImpl(db.dao)
 
 	}

@@ -11,6 +11,10 @@ class ProductRepositoryImpl(private val dao : ProductDao): ProductRepository {
 		dao.deleteProduct(product)
 	}
 
+	override suspend fun getProductById(id : Int) : Product? {
+		return dao.getProductById(id)
+	}
+
 	override fun getAllProducts() : Flow<List<Product>> {
 		return dao.getAllProducts()
 	}
